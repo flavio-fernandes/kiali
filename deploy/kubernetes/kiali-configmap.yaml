@@ -4,7 +4,7 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 data:
   config.yaml: |
     server:
@@ -12,6 +12,6 @@ data:
       static_content_root_directory: /opt/kiali/console
     external_services:
       jaeger:
-        url: ${JAEGER_URL}
+        url: http://jaeger-query-istio-system.127.0.0.1.nip.io
       grafana:
-        url: ${GRAFANA_URL}
+        url: http://grafana-istio-system.127.0.0.1.nip.io

@@ -4,7 +4,7 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 ---
 apiVersion: v1
 kind: Service
@@ -12,7 +12,7 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 spec:
   type: NodePort
   ports:
@@ -21,7 +21,7 @@ spec:
     port: 20001
   selector:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -29,7 +29,7 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 spec:
   backend:
     serviceName: kiali
@@ -41,13 +41,13 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: kiali
-      version: ${VERSION_LABEL}
+      version: v0.7.2
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -58,19 +58,19 @@ spec:
       name: kiali
       labels:
         app: kiali
-        version: ${VERSION_LABEL}
+        version: v0.7.2
     spec:
       serviceAccount: kiali
       containers:
-      - image: ${IMAGE_NAME}:${IMAGE_VERSION}
-        ${IMAGE_PULL_POLICY_TOKEN}
+      - image: kiali/kiali:v0.7.2
+        imagePullPolicy: Always
         name: kiali
         command:
         - "/opt/kiali/kiali"
         - "-config"
         - "/kiali-configuration/config.yaml"
         - "-v"
-        - "${VERBOSE_MODE}"
+        - "4"
         env:
         - name: ACTIVE_NAMESPACE
           valueFrom:
@@ -100,7 +100,7 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 rules:
 - apiGroups: ["", "apps", "autoscaling"]
   resources:
@@ -167,7 +167,7 @@ metadata:
   name: kiali
   labels:
     app: kiali
-    version: ${VERSION_LABEL}
+    version: v0.7.2
 roleRef:
   kind: ClusterRole
   name: kiali
@@ -175,4 +175,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kiali
-  namespace: ${NAMESPACE}
+  namespace: istio-system
