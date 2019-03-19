@@ -15,3 +15,4 @@ data:
         url: http://jaeger-query-istio-system.127.0.0.1.nip.io
       grafana:
         url: http://grafana-istio-system.127.0.0.1.nip.io
+      prometheus_service_url: http://prometheus-system-discovery.knative-monitoring.svc.cluster.local:9090
