@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kiali-console
+  labels:
+    app: kiali
+    version: v0.7.2
+  namespace: istio-system
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 20001
+  selector:
+    app: kiali
+    version: v0.7.2
+  sessionAffinity: None
+  type: LoadBalancer
